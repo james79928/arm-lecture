@@ -85,13 +85,52 @@ static void GameEventTask3( void *pvParameters )
 		GAME_EventHandler3();
 	}
 }
+static void GameEventTask4( void *pvParameters )
+{
+	while( 1 ){
+		GAME_EventHandler4();
+	}
+}
+static void GameEventTask5( void *pvParameters )
+{
+	while( 1 ){
+		GAME_EventHandler5();
+	}
+}
 
+static void GameEventTask6( void *pvParameters )
+{
+	while( 1 ){
+		GAME_EventHandler6();
+	}
+}
+static void GameEventTask7( void *pvParameters )
+{
+	while( 1 ){
+		GAME_EventHandler7();
+	}
+}
+static void GameEventTask8( void *pvParameters )
+{
+	while( 1 ){
+		GAME_EventHandler8();
+	}
+}
 static void GameTask( void *pvParameters )
 {
 	while( 1 ){
 		GAME_Update();
 		GAME_Render();
-		vTaskDelay( 10 );
+		vTaskDelay( 50 );
+	}
+}
+
+static void GameTask2( void *pvParameters )
+{
+	while( 1 ){
+		GAME_Update2();
+		GAME_Render_Dot();
+		vTaskDelay( 5000 );
 	}
 }
 
@@ -99,14 +138,41 @@ static void GameTask( void *pvParameters )
 int main(void)
 {
 	prvInit();
+	
+	STM_EVAL_LEDInit(LED3);
+	STM_EVAL_LEDOff(LED3);
+	STM_EVAL_LEDInit(LED4);
+	STM_EVAL_LEDOff(LED4);
+        
+	GPIO_InitTypeDef GPIO_InitStruct;
+//	GPIO_InitTypeDef GPIO_InitStruct2;
+//	GPIO_InitTypeDef GPIO_InitStruct3;
+//	GPIO_InitTypeDef GPIO_InitStruct4;
+//	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC,ENABLE);
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE,ENABLE);
+//	GPIO_StructInit(&GPIO_InitStruct);
+	GPIO_StructInit7(&GPIO_InitStruct);
+//	GPIO_StructInit6(&GPIO_InitStruct);
+//	GPIO_StructInit8(&GPIO_InitStruct);
+	GPIO_Init(GPIOE,&GPIO_InitStruct);
+//	GPIO_Init(GPIOC,&GPIO_InitStruct);
+
+	RCC_AHB2PeriphClockCmd(RCC_AHB2Periph_RNG, ENABLE);
+	RNG_Cmd(ENABLE);	
 
 	if( STM_EVAL_PBGetState( BUTTON_USER ) )
 		demoMode = 1;
 
+//	xTaskCreate( GameTask2, (signed char*) "GameTask2", 128, NULL, tskIDLE_PRIORITY + 1, NULL );
 	xTaskCreate( GameTask, (signed char*) "GameTask", 128, NULL, tskIDLE_PRIORITY + 1, NULL );
-	xTaskCreate( GameEventTask1, (signed char*) "GameEventTask1", 128, NULL, tskIDLE_PRIORITY + 1, NULL );
-	xTaskCreate( GameEventTask2, (signed char*) "GameEventTask2", 128, NULL, tskIDLE_PRIORITY + 1, NULL );
-	xTaskCreate( GameEventTask3, (signed char*) "GameEventTask3", 128, NULL, tskIDLE_PRIORITY + 1, NULL );
+//	xTaskCreate( GameEventTask1, (signed char*) "GameEventTask1", 128, NULL, tskIDLE_PRIORITY + 1, NULL );
+//	xTaskCreate( GameEventTask2, (signed char*) "GameEventTask2", 128, NULL, tskIDLE_PRIORITY + 1, NULL );
+//	xTaskCreate( GameEventTask3, (signed char*) "GameEventTask3", 128, NULL, tskIDLE_PRIORITY + 1, NULL );
+//	xTaskCreate( GameEventTask4, (signed char*) "GameEventTask4", 128, NULL, tskIDLE_PRIORITY + 1, NULL );
+	xTaskCreate( GameEventTask5, (signed char*) "GameEventTask5", 128, NULL, tskIDLE_PRIORITY + 1, NULL );
+//	xTaskCreate( GameEventTask6, (signed char*) "GameEventTask6", 128, NULL, tskIDLE_PRIORITY + 1, NULL );
+//	xTaskCreate( GameEventTask7, (signed char*) "GameEventTask7", 128, NULL, tskIDLE_PRIORITY + 1, NULL );
+//	xTaskCreate( GameEventTask8, (signed char*) "GameEventTask8", 128, NULL, tskIDLE_PRIORITY + 1, NULL );
 
 	//Call Scheduler
 	vTaskStartScheduler();

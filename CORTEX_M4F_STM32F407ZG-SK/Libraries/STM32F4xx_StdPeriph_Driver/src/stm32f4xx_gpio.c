@@ -256,11 +256,54 @@ void GPIO_StructInit(GPIO_InitTypeDef* GPIO_InitStruct)
   /* Reset GPIO init structure parameters values */
   GPIO_InitStruct->GPIO_Pin  = GPIO_Pin_All;
   GPIO_InitStruct->GPIO_Mode = GPIO_Mode_IN;
-  GPIO_InitStruct->GPIO_Speed = GPIO_Speed_2MHz;
+//  GPIO_InitStruct->GPIO_Speed = GPIO_Speed_2MHz;
+  GPIO_InitStruct->GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_InitStruct->GPIO_OType = GPIO_OType_PP;
-  GPIO_InitStruct->GPIO_PuPd = GPIO_PuPd_NOPULL;
+//  GPIO_InitStruct->GPIO_PuPd = GPIO_PuPd_NOPULL;
+  GPIO_InitStruct->GPIO_PuPd = GPIO_PuPd_DOWN;
 }
-
+void GPIO_StructInit8(GPIO_InitTypeDef* GPIO_InitStruct)
+{
+  /* Reset GPIO init structure parameters values */
+  GPIO_InitStruct->GPIO_Pin  = GPIO_Pin_8;
+  GPIO_InitStruct->GPIO_Mode = GPIO_Mode_IN;
+  GPIO_InitStruct->GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_InitStruct->GPIO_OType = GPIO_OType_PP;
+//  GPIO_InitStruct->GPIO_PuPd = GPIO_PuPd_NOPULL;
+  GPIO_InitStruct->GPIO_PuPd = GPIO_PuPd_DOWN;
+}
+void GPIO_StructInit9(GPIO_InitTypeDef* GPIO_InitStruct)
+{
+  /* Reset GPIO init structure parameters values */
+  GPIO_InitStruct->GPIO_Pin  = GPIO_Pin_9;
+  GPIO_InitStruct->GPIO_Mode = GPIO_Mode_IN;
+  GPIO_InitStruct->GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_InitStruct->GPIO_OType = GPIO_OType_PP;
+//  GPIO_InitStruct->GPIO_PuPd = GPIO_PuPd_NOPULL;
+  GPIO_InitStruct->GPIO_PuPd = GPIO_PuPd_DOWN;
+}
+#if 1 
+void GPIO_StructInit7(GPIO_InitTypeDef* GPIO_InitStruct)
+{
+  /* Reset GPIO init structure parameters values */
+  GPIO_InitStruct->GPIO_Pin  = GPIO_Pin_2 | GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5;
+  GPIO_InitStruct->GPIO_Mode = GPIO_Mode_IN;
+  GPIO_InitStruct->GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_InitStruct->GPIO_OType = GPIO_OType_PP;
+//  GPIO_InitStruct->GPIO_PuPd = GPIO_PuPd_NOPULL;
+  GPIO_InitStruct->GPIO_PuPd = GPIO_PuPd_DOWN;
+}
+#endif
+void GPIO_StructInit13(GPIO_InitTypeDef* GPIO_InitStruct)
+{
+  /* Reset GPIO init structure parameters values */
+  GPIO_InitStruct->GPIO_Pin  = GPIO_Pin_13;
+  GPIO_InitStruct->GPIO_Mode = GPIO_Mode_IN;
+  GPIO_InitStruct->GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_InitStruct->GPIO_OType = GPIO_OType_PP;
+//  GPIO_InitStruct->GPIO_PuPd = GPIO_PuPd_NOPULL;
+  GPIO_InitStruct->GPIO_PuPd = GPIO_PuPd_DOWN;
+}
 /**
   * @brief  Locks GPIO Pins configuration registers.
   * @note   The locked registers are GPIOx_MODER, GPIOx_OTYPER, GPIOx_OSPEEDR,
